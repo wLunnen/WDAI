@@ -11,12 +11,11 @@
       padding: 0;
     }
 
-    body {
+    html, body {
+      height: 100%;
       font-family: sans-serif;
       background: url('https://source.unsplash.com/1600x900/?nature') no-repeat center center/cover;
       transition: background 0.5s ease;
-      min-height: 100vh;
-      padding-bottom: 70px; /* Space for fixed footer */
     }
 
     .container {
@@ -25,29 +24,37 @@
       gap: 1rem;
       padding: 1rem;
       justify-content: center;
+      min-height: calc(100vh - 70px);
     }
 
     .card {
       background: white;
       border-radius: 1rem;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, width 0.5s ease;
       cursor: pointer;
-      flex: 0 1 calc(33.33% - 2rem);
+      flex: 0 1 calc(20% - 2rem);
       width: 20em;
     }
 
     .card:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
     }
 
     .card.expanded {
-      flex: 1 0 100%;
-      width: 100% !important;
-      transform: scale(1) !important;
-      z-index: 2;
-      position: relative;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      z-index: 1000;
+      transform: none !important;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: white;
     }
 
     .card img {
@@ -57,6 +64,7 @@
 
     .card-content {
       padding: 1rem;
+      text-align: center;
     }
 
     .footer {
@@ -69,8 +77,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 0.75rem 1rem;
-      box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-      z-index: 999;
+      box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
     }
 
     .footer button {
@@ -89,21 +97,11 @@
     }
 
     @media (max-width: 768px) {
-      .container {
-        flex-direction: row;
-        justify-content: space-around;
-      }
-
       .card {
-        width: 5em;
-        flex: 0 1 calc(25% - 1rem);
+        width: 6em;
+        flex: 0 1 calc(50% - 1rem);
         border-radius: 20px;
         text-align: center;
-      }
-
-      .card img {
-        width: 100%;
-        border-radius: 20px;
       }
 
       .card-content {
@@ -118,104 +116,7 @@
 </head>
 <body>
   <div class="container" id="cardContainer">
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 1</h3>
-        <p>A</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 2</h3>
-        <p>B</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 3</h3>
-        <p>C</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 4</h3>
-        <p>D</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 5</h3>
-        <p>E</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 6</h3>
-        <p>F</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 7</h3>
-        <p>G</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 8</h3>
-        <p>H</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 9</h3>
-        <p>I</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 10</h3>
-        <p>J</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 11</h3>
-        <p>K</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 12</h3>
-        <p>L</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 13</h3>
-        <p>M</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300" alt="Thumbnail">
-      <div class="card-content">
-        <h3>Card Title 14</h3>
-        <p>N</p>
-      </div>
-    </div>
+    <!-- Cards dynamically rendered -->
   </div>
 
   <div class="footer">
@@ -225,7 +126,6 @@
   </div>
 
   <script>
-    let currentExpanded = null;
     const container = document.getElementById('cardContainer');
     const backgrounds = [
       'https://source.unsplash.com/1600x900/?mountain',
@@ -235,32 +135,63 @@
       'https://source.unsplash.com/1600x900/?forest'
     ];
     let bgIndex = 0;
+    let currentExpanded = null;
 
-    function setupCardListeners() {
-      const cards = document.querySelectorAll('.card');
-      cards.forEach(card => {
-        card.addEventListener('click', () => {
-          if (currentExpanded && currentExpanded !== card) {
-            currentExpanded.classList.remove('expanded');
+    const cardData = Array.from({ length: 14 }, (_, i) => ({
+      title: `Card Title ${i + 1}`,
+      content: String.fromCharCode(65 + i),
+      image: 'https://via.placeholder.com/300'
+    }));
+
+    function createCard({ title, content, image }) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${image}" alt="Thumbnail">
+        <div class="card-content">
+          <h3>${title}</h3>
+          <p>${content}</p>
+        </div>
+      `;
+      card.addEventListener('click', () => {
+        if (currentExpanded && currentExpanded !== card) {
+          currentExpanded.classList.remove('expanded');
+        }
+        card.classList.toggle('expanded');
+        currentExpanded = card.classList.contains('expanded') ? card : null;
+
+        // Hide other cards when one is expanded
+        const allCards = document.querySelectorAll('.card');
+        allCards.forEach(c => {
+          if (c !== currentExpanded) {
+            c.style.display = currentExpanded ? 'none' : 'block';
           }
-          card.classList.toggle('expanded');
-          currentExpanded = card.classList.contains('expanded') ? card : null;
         });
       });
+      return card;
+    }
+
+    function renderCards(data) {
+      container.innerHTML = '';
+      data.forEach(item => container.appendChild(createCard(item)));
     }
 
     function collapseExpandedCard() {
       if (currentExpanded) {
         currentExpanded.classList.remove('expanded');
         currentExpanded = null;
+
+        // Show all cards again
+        const allCards = document.querySelectorAll('.card');
+        allCards.forEach(card => {
+          card.style.display = 'block';
+        });
       }
     }
 
     function randomizeCards() {
-      const cardsArray = Array.from(container.children);
-      const shuffled = cardsArray.sort(() => 0.5 - Math.random());
-      shuffled.forEach(card => container.appendChild(card));
-      setupCardListeners();
+      const shuffled = [...cardData].sort(() => 0.5 - Math.random());
+      renderCards(shuffled);
     }
 
     function changeBackground() {
@@ -268,7 +199,8 @@
       document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
     }
 
-    setupCardListeners();
+    // Initialize
+    renderCards(cardData);
   </script>
 </body>
 </html>
