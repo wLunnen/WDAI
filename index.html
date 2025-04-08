@@ -15,14 +15,16 @@
       font-family: sans-serif;
       background: url('https://source.unsplash.com/1600x900/?nature') no-repeat center center/cover;
       transition: background 0.5s ease;
+      min-height: 100vh;
+      padding-bottom: 70px; /* Space for fixed footer */
     }
 
     .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
       padding: 1rem;
-      transition: all 0.3s ease;
+      justify-content: center;
     }
 
     .card {
@@ -32,6 +34,8 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, width 0.5s ease;
       cursor: pointer;
+      flex: 0 1 calc(33.33% - 2rem);
+      width: 20em;
     }
 
     .card:hover {
@@ -39,9 +43,11 @@
     }
 
     .card.expanded {
-      grid-column: 1 / -1;
+      flex: 1 0 100%;
       width: 100% !important;
       transform: scale(1) !important;
+      z-index: 2;
+      position: relative;
     }
 
     .card img {
@@ -62,8 +68,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 2rem;
+      padding: 0.75rem 1rem;
       box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+      z-index: 999;
     }
 
     .footer button {
@@ -83,10 +90,13 @@
 
     @media (max-width: 768px) {
       .container {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        flex-direction: row;
+        justify-content: space-around;
       }
 
       .card {
+        width: 5em;
+        flex: 0 1 calc(25% - 1rem);
         border-radius: 20px;
         text-align: center;
       }
@@ -132,8 +142,8 @@
   </div>
 
   <script>
-    const cards = document.querySelectorAll('.card');
     let currentExpanded = null;
+    const container = document.getElementById('cardContainer');
     const backgrounds = [
       'https://source.unsplash.com/1600x900/?mountain',
       'https://source.unsplash.com/1600x900/?ocean',
@@ -143,15 +153,18 @@
     ];
     let bgIndex = 0;
 
-    cards.forEach(card => {
-      card.addEventListener('click', () => {
-        if (currentExpanded && currentExpanded !== card) {
-          currentExpanded.classList.remove('expanded');
-        }
-        card.classList.toggle('expanded');
-        currentExpanded = card.classList.contains('expanded') ? card : null;
+    function setupCardListeners() {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          if (currentExpanded && currentExpanded !== card) {
+            currentExpanded.classList.remove('expanded');
+          }
+          card.classList.toggle('expanded');
+          currentExpanded = card.classList.contains('expanded') ? card : null;
+        });
       });
-    });
+    }
 
     function collapseExpandedCard() {
       if (currentExpanded) {
@@ -161,15 +174,18 @@
     }
 
     function randomizeCards() {
-      const container = document.getElementById('cardContainer');
-      const shuffled = Array.from(container.children).sort(() => 0.5 - Math.random());
-      shuffled.forEach(el => container.appendChild(el));
+      const cardsArray = Array.from(container.children);
+      const shuffled = cardsArray.sort(() => 0.5 - Math.random());
+      shuffled.forEach(card => container.appendChild(card));
+      setupCardListeners();
     }
 
     function changeBackground() {
       bgIndex = (bgIndex + 1) % backgrounds.length;
       document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
     }
+
+    setupCardListeners();
   </script>
 </body>
 </html>
