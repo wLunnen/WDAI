@@ -137,11 +137,19 @@
     let bgIndex = 0;
     let currentExpanded = null;
 
-    const cardData = Array.from({ length: 14 }, (_, i) => ({
-      title: `Card Title ${i + 1}`,
-      content: String.fromCharCode(65 + i),
-      image: 'https://via.placeholder.com/300'
-    }));
+    // Developer can customize each card here
+    const cardData = [
+      { title: 'About Me', content: 'This is my story.', image: 'https://via.placeholder.com/300' },
+      { title: 'Projects', content: 'A list of awesome things I built.', image: 'https://via.placeholder.com/300' },
+      { title: 'Blog', content: 'Thoughts and tutorials.', image: 'https://via.placeholder.com/300' },
+      { title: 'Contact', content: 'Get in touch with me.', image: 'https://via.placeholder.com/300' },
+      { title: 'Gallery', content: 'Photos and media.', image: 'https://via.placeholder.com/300' },
+      { title: 'Resume', content: 'My professional experience.', image: 'https://via.placeholder.com/300' },
+      { title: 'Services', content: 'What I offer.', image: 'https://via.placeholder.com/300' },
+      { title: 'Testimonials', content: 'What people say.', image: 'https://via.placeholder.com/300' },
+      { title: 'FAQs', content: 'Answers to common questions.', image: 'https://via.placeholder.com/300' },
+      { title: 'Store', content: 'Buy my merch.', image: 'https://via.placeholder.com/300' }
+    ];
 
     function createCard({ title, content, image }) {
       const card = document.createElement('div');
