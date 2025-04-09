@@ -67,7 +67,7 @@
       width: 100%;
       background: rgba(255, 255, 255, 0.95);
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       padding: 0.75rem 1rem;
       box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
@@ -76,6 +76,16 @@
 
     .footer a {
       margin: 0 10px;
+    }
+
+    .footer img {
+      width: 30px; /* Ensure all icons are the same size */
+      height: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .footer img:hover {
+      transform: scale(1.1); /* Slight scale effect on hover */
     }
 
     @media (max-width: 768px) {
@@ -185,19 +195,19 @@
 
   <footer class="footer">
     <a href="https://www.fiverr.com/wlunnen/buying?source=avatar_menu_profile">
-      <img id="favicon" src="https://fiverr-res.cloudinary.com/npm-assets/layout-service/favicon-32x32.8f21439.png" alt="Fiverr">
+      <img src="https://fiverr-res.cloudinary.com/npm-assets/layout-service/favicon-32x32.8f21439.png" alt="Fiverr">
     </a>
     <a href="https://wlunnen.github.io/WDI/">
-      <img id="favicon" src="https://i.postimg.cc/RZHDYJbF/logo-text-cropped.png" alt="WDI Portfolio">
+      <img src="https://i.postimg.cc/RZHDYJbF/logo-text-cropped.png" alt="WDI Portfolio">
     </a>
     <a href="https://www.upwork.com/nx/find-work/best-matches">
-      <img id="favicon" src="https://i.postimg.cc/90C8RxWw/upwork-512.webp" alt="Upwork">
+      <img src="https://i.postimg.cc/90C8RxWw/upwork-512.webp" alt="Upwork">
     </a>
     <a href="https://www.linkedin.com/in/thomas-lunnen-iii-a35017175">
-      <img id="favicon" src="https://i.postimg.cc/C1Q5d2Cm/linkedin-icon.webp" alt="LinkedIn">
+      <img src="https://i.postimg.cc/C1Q5d2Cm/linkedin-icon.webp" alt="LinkedIn">
     </a>
     <a href="https://linktr.ee/quarter.puerto">
-      <img id="favicon" src="https://i.postimg.cc/brFqmSVg/linktree-logo.webp" alt="Linktree">
+      <img src="https://i.postimg.cc/brFqmSVg/linktree-logo.webp" alt="Linktree">
     </a>
   </footer>
 
