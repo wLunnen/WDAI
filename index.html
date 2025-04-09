@@ -11,11 +11,14 @@
        padding: 0;
      }
  
+     body {
      html, body {
        height: 100%;
        font-family: sans-serif;
        background: url('https://source.unsplash.com/1600x900/?nature') no-repeat center center/cover;
        transition: background 0.5s ease;
+       min-height: 100vh;
+       padding-bottom: 70px; /* Space for fixed footer */
      }
  
      .container {
@@ -31,18 +34,26 @@
        background: white;
        border-radius: 1rem;
        overflow: hidden;
+       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
        transition: transform 0.3s ease, width 0.5s ease;
        cursor: pointer;
+       flex: 0 1 calc(33.33% - 2rem);
        flex: 0 1 calc(20% - 2rem);
        width: 20em;
      }
  
      .card:hover {
+       transform: scale(1.1);
        transform: scale(1.05);
      }
  
      .card.expanded {
+       flex: 1 0 100%;
+       width: 100% !important;
+       transform: scale(1) !important;
+       z-index: 2;
+       position: relative;
        position: fixed;
        top: 0;
        left: 0;
@@ -77,6 +88,8 @@
        justify-content: space-between;
        align-items: center;
        padding: 0.75rem 1rem;
+       box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+       z-index: 999;
        box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
        z-index: 9999;
      }
@@ -97,11 +110,23 @@
      }
  
      @media (max-width: 768px) {
+       .container {
+         flex-direction: row;
+         justify-content: space-around;
+       }
+ 
        .card {
+         width: 5em;
+         flex: 0 1 calc(25% - 1rem);
          width: 6em;
          flex: 0 1 calc(50% - 1rem);
          border-radius: 20px;
          text-align: center;
+       }
+ 
+       .card img {
+         width: 100%;
+         border-radius: 20px;
        }
  
        .card-content {
@@ -116,6 +141,104 @@
  </head>
  <body>
    <div class="container" id="cardContainer">
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 1</h3>
+         <p>A</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 2</h3>
+         <p>B</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 3</h3>
+         <p>C</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 4</h3>
+         <p>D</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 5</h3>
+         <p>E</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 6</h3>
+         <p>F</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 7</h3>
+         <p>G</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 8</h3>
+         <p>H</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 9</h3>
+         <p>I</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 10</h3>
+         <p>J</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 11</h3>
+         <p>K</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 12</h3>
+         <p>L</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 13</h3>
+         <p>M</p>
+       </div>
+     </div>
+     <div class="card">
+       <img src="https://via.placeholder.com/300" alt="Thumbnail">
+       <div class="card-content">
+         <h3>Card Title 14</h3>
+         <p>N</p>
+       </div>
+     </div>
      <!-- Cards dynamically rendered -->
    </div>
  
@@ -126,6 +249,7 @@
    </div>
  
    <script>
+     let currentExpanded = null;
      const container = document.getElementById('cardContainer');
      const backgrounds = [
        'https://source.unsplash.com/1600x900/?mountain',
@@ -137,36 +261,17 @@
      let bgIndex = 0;
      let currentExpanded = null;
  
+     function setupCardListeners() {
+       const cards = document.querySelectorAll('.card');
+       cards.forEach(card => {
+         card.addEventListener('click', () => {
+           if (currentExpanded && currentExpanded !== card) {
+             currentExpanded.classList.remove('expanded');
      const cardData = Array.from({ length: 14 }, (_, i) => ({
        title: `Card Title ${i + 1}`,
        content: String.fromCharCode(65 + i),
        image: 'https://via.placeholder.com/300'
      }));
-     
-     // Developer can customize each card here
-     const cardData = [
-       { title: 'About Me', content: 'This is my story.', image: 'https://via.placeholder.com/300' },
-       { title: 'Projects', content: 'A list of awesome things I built.', image: 'https://via.placeholder.com/300' },
-       { title: 'Blog', content: 'Thoughts and tutorials.', image: 'https://via.placeholder.com/300' },
-       { title: 'Contact', content: 'Get in touch with me.', image: 'https://via.placeholder.com/300' },
-       { title: 'Gallery', content: 'Photos and media.', image: 'https://via.placeholder.com/300' },
-       { title: 'Resume', content: 'My professional experience.', image: 'https://via.placeholder.com/300' },
-       { title: 'Archive', content: 'Audio archive of personal friends, local icons and my own damn self.', image: 'https://i.postimg.cc/SxFrLc9z/Screenshot-2.png' },
-       { title: 'About You', content: 'Tell me your story.', image: 'https://via.placeholder.com/300' },
-       { title: 'Contact', content: 'Get in touch with me.', image: 'https://i.postimg.cc/Qd1fvfDb/Screenshot-1.png' },
-       { title: 'CodePen', content: 'Sandbox projects/artwork.', image: 'https://i.postimg.cc/pdcRpq61/Screenshot-20250401-091427.png' },
-       { title: 'CSSC', content: 'City of Corvallis services.', image: 'https://i.postimg.cc/rsF9dR26/Screenshot-20250313-123033-2.png' },
-       { title: 'Erich's', content: 'Carpet care services KCMO.', image: 'https://i.postimg.cc/pTjqGztR/Ss5.png' },
-       { title: 'Github', content: 'The hub.', image: 'https://i.postimg.cc/ZYrC0hJ9/Screenshot-20250331-100205.png' },
-       { title: 'Replit', content: 'LaunchCodeKC staple.', image: 'https://i.postimg.cc/DZ37K8Jx/Screenshot-20250331-100030.png' },
-       { title: 'Services', content: 'What I offer.', image: 'https://via.placeholder.com/300' },
-       { title: 'Testimonials', content: 'What people say.', image: 'https://via.placeholder.com/300' },
-       { title: 'FAQs', content: 'Answers to common questions.', image: 'https://via.placeholder.com/300' },
-       { title: 'Store', content: 'Buy my merch.', image: 'https://via.placeholder.com/300' }
-       { title: 'Submit Resume', content: 'My professional experience.', image: 'https://via.placeholder.com/300' },
-       { title: 'Testimonials', content: 'What people say.', image: 'https://via.placeholder.com/300' },
-       { title: 'WDI', content: 'The mother page.', image: 'https://i.postimg.cc/sDFQRqwc/OG-logo.png' },
-     ];
  
      function createCard({ title, content, image }) {
        const card = document.createElement('div');
@@ -191,6 +296,8 @@
            if (c !== currentExpanded) {
              c.style.display = currentExpanded ? 'none' : 'block';
            }
+           card.classList.toggle('expanded');
+           currentExpanded = card.classList.contains('expanded') ? card : null;
          });
        });
        return card;
@@ -215,6 +322,10 @@
      }
  
      function randomizeCards() {
+       const cardsArray = Array.from(container.children);
+       const shuffled = cardsArray.sort(() => 0.5 - Math.random());
+       shuffled.forEach(card => container.appendChild(card));
+       setupCardListeners();
        const shuffled = [...cardData].sort(() => 0.5 - Math.random());
        renderCards(shuffled);
      }
@@ -224,6 +335,7 @@
        document.body.style.backgroundImage = `url('${backgrounds[bgIndex]}')`;
      }
  
+     setupCardListeners();
      // Initialize
      renderCards(cardData);
    </script>
