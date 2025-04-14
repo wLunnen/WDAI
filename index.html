@@ -36,6 +36,28 @@
     }
 
     .card {
+    /* Layout */
+    display: flex;
+    flex: 0 1 calc(33.33% - 2rem);
+    width: 20em;
+    height: 250px;
+    text-align: center;
+    
+    /* Styling */
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    /* Interactivity */
+    cursor: pointer;
+    
+    /* Transitions */
+    transition: transform 0.3s ease, width 0.5s ease;
+   }
+
+    /*
+    .card {
       background: white;
       border-radius: 1rem;
       overflow: hidden;
@@ -44,15 +66,13 @@
       cursor: pointer;
       flex: 0 1 calc(33.33% - 2rem);
       width: 20em;
-    }
-
-    .card {
       height: 250px;
       width: 5em;
       flex: 0 1 calc(50% - 1rem);
       border-radius: 20px;
       text-align: center;
     }
+    */
 
     .card:hover {
       transform: scale(1.05);
@@ -126,16 +146,14 @@
     top: 0;
     width: 100%;
     }
-
       
     /*
-    //sidebar attmpt
+    sidebar attmpt
     div.w3-sidebar img {
       background-repeat: no-repeat;
       height: 100%;
       background-repeat: repeat-y;
     }
-
     
     div.sidebar {
     float:left;
