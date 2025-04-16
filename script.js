@@ -9,3 +9,10 @@ document.getElementByClassName('card') {
     return false;
 };
 */
+document.getElementById('click') {
+  onClick="function(){
+    position: absolute;
+    z-index: 1;
+    return false;
+};
+};
